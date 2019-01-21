@@ -17,7 +17,6 @@
     "fs-extra": "^7.0.1",
     "iconv-lite": "^0.4.24",
     "mongoose": "^5.4.5",
-    "pm2": "pm2",
     "puppeteer": "^1.11.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
