@@ -11,8 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.3",
+    "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
-    "puppeteer": "^1.11.0"
+    "fs-extra": "^7.0.1",
+    "iconv-lite": "^0.4.24",
+    "mongoose": "^5.4.5",
+    "pm2": "pm2",
+    "puppeteer": "^1.11.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
