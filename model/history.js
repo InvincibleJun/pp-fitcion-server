@@ -2,16 +2,15 @@ module.exports = {
   name: 'history',
   schema: {
     bookId: {
-      type: String
+      type: String,
+      ref: 'fiction'
     },
-    artcileIndex: {
+    contentIndex: {
       type: String
     },
     userId: {
-      type: String
-    },
-    userName: {
-      type: String
+      type: String,
+      ref: 'user'
     }
   }
 };

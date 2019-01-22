@@ -5,6 +5,10 @@ module.exports = {
       type: String,
       unique: true
     },
+    download: {
+      type: Boolean,
+      default: false
+    },
     desc: {
       type: String
     },

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 module.exports = {
   name: 'user',
@@ -9,16 +9,21 @@ module.exports = {
       unique: true
     },
     name: {
-      type: String,
+      type: String
     },
     url: {
-      type: String,
+      type: String
     },
     books: {
       type: [
         {
-          type: Schema.Types.ObjectId,
-          ref: 'fiction'
+          index: {
+            type: Number
+          },
+          bookId: {
+            type: Schema.Types.ObjectId,
+            ref: 'fiction'
+          }
         }
       ],
       default: []

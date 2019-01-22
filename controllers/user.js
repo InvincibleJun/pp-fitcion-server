@@ -5,20 +5,27 @@
  * @param {*} next
  */
 async function addUser(req, res, next) {
+  console.log(req.body);
   const { openid, nickName: name, avatarUrl: url } = req.body;
-  const exitsUser = await mdb.user.findOne({ openid });
+  const exitsUser = await mdb.user
+    .findOne({ openid })
+    .populate({ path: 'books.bookId', select: ['auth', 'title', 'picture'] });
+  // .populate({
+  // path: 'books.$.bookId',
+  // { $elemMatch: { bookId: _id } }
+  // });
 
   if (exitsUser) {
-    return res.send(200);
+    return res.send(exitsUser);
   }
 
-  await mdb.user.create({
+  const result = await mdb.user.create({
     openid,
     name,
     url
   });
 
-  res.send(200);
+  res.send(result);
 }
 
 /**
@@ -28,9 +35,9 @@ async function addUser(req, res, next) {
  * @param {*} next
  */
 async function getUser(req, res, next) {
-  const { openid } = req.params;
+  const { id } = req.params;
 
-  const result = await mdb.user.findOne({ openid }).populate('books');
+  const result = await mdb.user.findById(id).populate('books');
 
   res.send(result);
 }
@@ -42,20 +49,21 @@ async function getUser(req, res, next) {
  * @param {*} next
  */
 async function updateUser(req, res, next) {
-  const { _id, openid } = req.body;
-  // if (_id) {
+  const { openid, _id } = req.body;
+
   const has = await mdb.user.findOne({
     openid,
-    books: {
-      $in: [_id]
-    }
+    books: { $elemMatch: { bookId: _id } }
   });
 
   if (has) {
     return res.send(200);
   }
 
-  await mdb.user.update({ openid }, { $push: { books: _id } });
+  await mdb.user.update(
+    { openid },
+    { $push: { books: { bookId: _id, index: -1 } } }
+  );
 
   res.send(200);
 }

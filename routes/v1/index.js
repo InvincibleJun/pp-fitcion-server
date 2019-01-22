@@ -8,10 +8,12 @@ module.exports = router => {
 
   router.get('/article/:index', IndexController.openArticle);
 
+  router.get('/check/:id', IndexController.checkIsDownLoad)
 
   router.post('/user', UserController.addUser)
   
   router.put('/user', UserController.updateUser)
   
   router.get('/user/:openid', UserController.getUser)
+  router.get('/update', IndexController.update)
 };
