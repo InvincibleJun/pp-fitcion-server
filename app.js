@@ -9,4 +9,4 @@ global.mdb = require('./model/index');
 
 app.use(require('./routes/index'));
 
-app.listen(5050);
+app.listen(8888);

@@ -51,9 +51,10 @@ async function readArticle(_id, index) {
   return await fs.readFile(`./books/${_id}/${index}`, 'utf-8');
 }
 
-async function readHistory(userId, bookId, contentIndex) {
+async function readHistory(userId, bookId, index) {
+  console.log(userId, bookId, index)
   await mdb.user.updateOne(
-    { _id: userId, books: { $elemMatch: { bookId } } },
+    { openid: userId, books: { $elemMatch: { bookId } } },
     { $set: { 'books.$.index': index } }
   );
 }
