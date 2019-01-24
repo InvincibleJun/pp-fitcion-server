@@ -5,15 +5,10 @@
  * @param {*} next
  */
 async function addUser(req, res, next) {
-  console.log(req.body);
   const { openid, nickName: name, avatarUrl: url } = req.body;
   const exitsUser = await mdb.user
     .findOne({ openid })
     .populate({ path: 'books.bookId', select: ['auth', 'title', 'picture'] });
-  // .populate({
-  // path: 'books.$.bookId',
-  // { $elemMatch: { bookId: _id } }
-  // });
 
   if (exitsUser) {
     return res.send(exitsUser);
@@ -35,9 +30,9 @@ async function addUser(req, res, next) {
  * @param {*} next
  */
 async function getUser(req, res, next) {
-  const { id } = req.params;
+  const { openid } = req.headers;
 
-  const result = await mdb.user.findById(id).populate('books');
+  const result = await mdb.user.findOne({ openid }).populate('books');
 
   res.send(result);
 }
@@ -68,8 +63,24 @@ async function updateUser(req, res, next) {
   res.send(200);
 }
 
+/**
+ * 获得用户书架
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+async function getUserBooks(req, res, next) {
+  const { openid } = req.headers;
+  const result = await mdb.user
+    .findOne({ openid }, 'books')
+    .populate({ path: 'books.bookId', select: ['auth', 'title', 'picture'] });
+
+  res.send(result);
+}
+
 module.exports = {
   updateUser,
   addUser,
-  getUser
+  getUser,
+  getUserBooks
 };

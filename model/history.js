@@ -5,12 +5,22 @@ module.exports = {
       type: String,
       ref: 'fiction'
     },
-    contentIndex: {
+    articleIndex: {
       type: String
     },
     userId: {
       type: String,
       ref: 'user'
+    },
+    articleName: {
+      type: String
+    },
+    title: {
+      type: String
+    },
+    createTime: {
+      type: Date,
+      default: Date.now
     }
   }
 };

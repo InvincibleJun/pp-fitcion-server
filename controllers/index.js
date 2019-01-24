@@ -1,9 +1,9 @@
-const fs = require("fs-extra");
+const fs = require('fs-extra');
 const {
   downloadBook,
   readArticle,
   readHistory
-} = require("../services/fiction");
+} = require('../services/fiction');
 
 /**
  *
@@ -15,11 +15,11 @@ async function searchBooks(req, res, next) {
   const { keyword } = req.params;
   console.log(keyword);
   const result = await mdb.fiction
-    .find({ title: new RegExp("^" + keyword) }, [
-      "title",
-      "count",
-      "auth",
-      "picture"
+    .find({ title: new RegExp('^' + keyword) }, [
+      'title',
+      'count',
+      'auth',
+      'picture'
     ])
     .limit(10);
 
@@ -36,14 +36,14 @@ async function openBook(req, res, next) {
   const { id } = req.params;
 
   const result = await mdb.fiction.findById(id, [
-    "title",
-    "count",
-    "auth",
-    "picture",
-    "desc",
-    "updateTime",
-    "download",
-    "content"
+    'title',
+    'count',
+    'auth',
+    'picture',
+    'desc',
+    'updateTime',
+    'download',
+    'content'
   ]);
 
   res.send(result);
@@ -68,10 +68,8 @@ async function openArticle(req, res, next) {
 
   let article = await readArticle(_id, index);
 
-  // await readHistoy(userId, _id, index);
   if (openid) {
-    await readHistory(openid, _id, index);
-    // mdb.user.update({ openid }, { $set: {} });
+    await readHistory(openid, _id, index, title, content[index].name);
   }
 
   res.send({
@@ -94,7 +92,7 @@ async function openArticle(req, res, next) {
  */
 async function checkIsDownLoad(req, res, next) {
   const { id } = req.params;
-  const { download } = await mdb.fiction.findById(id, "download");
+  const { download } = await mdb.fiction.findById(id, 'download');
   res.send({ download });
 }
 
@@ -112,7 +110,7 @@ async function update(req, res) {
   setInterval(async () => {
     const t = +new Date();
     const d = await mdb.fiction
-      .find({}, ["_id"])
+      .find({}, ['_id'])
       .limit(1)
       .skip(10000);
     // console.log(t - new Date());

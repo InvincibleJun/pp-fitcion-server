@@ -1,22 +1,24 @@
-const IndexController = require("../../controllers/index");
-const UserController = require("../../controllers/user");
+const IndexController = require('../../controllers/index');
+const UserController = require('../../controllers/user');
 
 module.exports = router => {
-  router.get("/search/:keyword", IndexController.searchBooks);
-  
-  router.get("/book/status/:id", IndexController.checkIsDownLoad);
+  router.get('/search/:keyword', IndexController.searchBooks);
 
-  router.get("/open/:id", IndexController.openBook);
+  router.get('/book/status/:id', IndexController.checkIsDownLoad);
 
-  router.get("/article/:index", IndexController.openArticle);
+  router.get('/open/:id', IndexController.openBook);
 
-  router.get("/check/:id", IndexController.checkIsDownLoad);
+  router.get('/article/:index', IndexController.openArticle);
 
-  router.post("/user", UserController.addUser);
+  router.get('/check/:id', IndexController.checkIsDownLoad);
 
-  router.put("/user", UserController.updateUser);
+  router.post('/user', UserController.addUser);
 
-  router.get("/user/:openid", UserController.getUser);
-  
-  router.get("/update", IndexController.update);
+  router.put('/user', UserController.updateUser);
+
+  router.get('/user', UserController.getUser);
+
+  router.get('/user/book', UserController.getUserBooks);
+
+  router.get('/update', IndexController.update);
 };
