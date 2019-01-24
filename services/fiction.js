@@ -27,9 +27,11 @@ async function downloadBook(id, content) {
           const $ = cheerio.load(html, { decodeEntities: false });
           const content = $('#content')
             .html()
-            .toString()
-            .replace(/(&nbsp;)+/g, '　　')
-            .replace(/<br>/g, '\r\n');
+            .replace(/笔趣阁 www\.xbiquge\.cc，[^(<br>)]+<br>/, '')
+            .split('<br>')
+            .filter(v => v !== '')
+            .map(v => v.replace(/\s/g, ''))
+            .join('\n');
 
           await fs.writeFile(`./books/${id}/${i}`, content, 'utf-8');
         } catch (e) {

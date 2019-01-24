@@ -8,6 +8,8 @@ module.exports = router => {
 
   router.get('/open/:id', IndexController.openBook);
 
+  // router.get('/test', IndexController.test);
+
   router.get('/article/:index', IndexController.openArticle);
 
   router.get('/check/:id', IndexController.checkIsDownLoad);

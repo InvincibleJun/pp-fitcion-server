@@ -13,7 +13,6 @@ const {
  */
 async function searchBooks(req, res, next) {
   const { keyword } = req.params;
-  console.log(keyword);
   const result = await mdb.fiction
     .find({ title: new RegExp('^' + keyword) }, [
       'title',
@@ -101,6 +100,7 @@ module.exports = {
   openBook,
   openArticle,
   update,
+  // test,
   checkIsDownLoad
 };
 
@@ -132,3 +132,14 @@ async function update(req, res) {
     // res.send(d);
   }, 500);
 }
+
+// async function test(req, res) {
+//   // const result = await mdb.fiction.update(
+//   //   { _id: '5c486a8f45f60ea72cd68fc5' },
+//   //   { $set: { download: false } }
+//   // );
+
+//   const result = await mdb.fiction.findById('5c48697545f60ea72cd66f98')
+
+//   res.send(result);
+// }

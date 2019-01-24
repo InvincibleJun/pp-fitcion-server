@@ -1,0 +1,10 @@
+{
+  "name": "fiction",
+  "script": "./app.js",
+  "cwd": "./",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "error_file": "./logs/err.log",
+  "out_file": "./logs/info.log"
+}
