@@ -7,7 +7,7 @@
     "dev": "nodemon app.js",
     "start": "pm2 start pm2-config.json",
   },
-  "author": "",
+  "author": "cj",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.3",
